@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelBloom</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Orbitron', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('img/bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .logo span {
+            font-weight: bold;
+            font-size: 1.5em;
+            background: linear-gradient(90deg, #ff6600, #ff0066, #6600ff, #00ccff, #ff6600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-animation 5s linear infinite;
+            background-size: 400% 400%;
+        }
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex: 1;
+        }
+        .nav-links a {
+            color: #ff6600;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        .nav-links a.active, .nav-links a:hover {
+            color: #00ccff;
+            text-decoration: underline;
+        }
+        .search-bar-container {
+            display: flex;
+            justify-content: flex-end;
+            width: 350px; /* Adjusted width to ensure all elements fit within the container */
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ff6600;
+            border-radius: 10px;
+            padding: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .search-bar input[type="text"] {
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 5px; /* Adjust margin to fit within the container */
+            outline: none;
+            flex: 1;
+        }
+        .search-bar button {
+            padding: 5px 10px;
+            border: 2px solid #ff6600;
+            border-radius: 5px;
+            background-color: transparent;
+            color: #ff6600;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        .search-bar button:last-child {
+            margin-right: 0;
+        }
+        .search-bar button + button {
+            margin-left: 2.5px; /* Add space between Search and Clear buttons */
+        }
+        .search-bar button:hover {
+            background-color: #00ccff;
+            color: white;
+            border-color: #00ccff;
+        }
+        .social-icons {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .social-icons a {
+            color: white;
+            font-size: 1.5em;
+            margin: 10px 0;
+            transition: color 0.3s;
+        }
+        .social-icons a:hover {
+            color: #00ccff;
+        }
+        .content {
+            margin-top: 100px;
+            padding: 20px;
+            text-align: center;
+        }
+        .content h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        .content p {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        .team {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .team-member {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 200px;
+            text-align: center;
+            position: relative;
+        }
+        .team-member img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+        .team-member h3 {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+        .team-member p {
+            margin: 5px 0;
+            font-size: 1em;
+            border: 1px solid #ff6600;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .contact-form {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 10px;
+            max-width: 500px;
+            text-align: left;
+        }
+        .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+        .contact-form input, .contact-form textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+        .contact-form button {
+            padding: 10px 20px;
+            border: 2px solid #ff6600;
+            border-radius: 5px;
+            background-color: transparent;
+            color: #ff6600;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            position: relative;
+        }
+        .contact-form button:hover {
+            background-color: #00ccff;
+            color: white;
+            border-color: #00ccff;
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .book-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            border: 2px solid #ff6600;
+            border-radius: 5px;
+            background-color: transparent;
+            color: #ff6600;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            margin-top: 40px;
+            position: relative;
+        }
+        .book-button:hover {
+            background-color: #00ccff;
+            color: white;
+            border-color: #00ccff;
+        }
+        .book-button img {
+            height: 30px;
+            margin-left: 10px;
+            animation: rumble 0.2s infinite;
+        }
+        @keyframes rumble {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(-2px, 2px); }
+            50% { transform: translate(2px, -2px); }
+            75% { transform: translate(-2px, -2px); }
+            100% { transform: translate(2px, 2px); }
+        }
+        .placeholder {
+            width: 350px; /* Ensure the placeholder has the same width as the search bar container */
+            height: 40px; /* Ensure the placeholder has the same height as the search bar */
+            display: none;
+        }
+        .recommendations-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        .recommendation-card {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Ensure the Visit button is aligned to the bottom */
+        }
+        .recommendation-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .recommendation-card h3 {
+            margin: 10px 0;
+            font-size: 1.5em;
+        }
+        .recommendation-card p {
+            font-size: 1em;
+        }
+        .recommendation-card .time {
+            color: #ff6600;
+            margin-top: 5px;
+        }
+        .recommendation-card button {
+            padding: 5px 10px;
+            border: 2px solid #ff6600;
+            border-radius: 5px;
+            background-color: transparent;
+            color: #ff6600;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            margin-top: 10px;
+        }
+        .recommendation-card button:hover {
+            background-color: #00ccff;
+            color: white;
+            border-color: #00ccff;
+        }
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .nav-links {
+                justify-content: flex-start;
+                width: 100%;
+            }
+            .nav-links a {
+                margin: 5px 0;
+            }
+            .search-bar-container {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .search-bar {
+                width: 100%;
+                margin-top: 10px;
+            }
+            .search-bar input[type="text"] {
+                width: calc(100% - 170px);
+                margin-right: 5px;
+            }
+            .placeholder {
+                width: 100%; /* Adjust to match the search bar's width on mobile */
+                height: 40px; /* Adjust to match the search bar's height on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo" onclick="showSection('home')">
+            <img src="img/logo.svg" alt="TravelBloom Logo">
+            <span>TravelBloom</span>
+        </div>
+        <div class="nav-links">
+            <a href="javascript:void(0)" onclick="showSection('home')" id="home-link" class="active">Home</a>
+            <a href="javascript:void(0)" onclick="showSection('about')" id="about-link">About Us</a>
+            <a href="javascript:void(0)" onclick="showSection('contact')" id="contact-link">Contact Us</a>
+        </div>
+        <div class="search-bar-container" id="search-bar-container">
+            <div class="search-bar">
+                <input type="text" placeholder="Search for recommendations...">
+                <button>Search</button>
+                <button id="clear-button">Clear</button>
+            </div>
+        </div>
+        <div class="placeholder" id="placeholder"></div>
+    </div>
+    <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+    <div id="home" class="section active">
+        <div class="content">
+            <h1>Welcome to TravelBloom</h1>
+            <p>Your ultimate travel recommendation site. Explore amazing destinations, get personalized recommendations, and plan your perfect trip with us!</p>
+            <button class="book-button" onclick="alert('Booking functionality coming soon!')">
+                Book your flight!
+                <img src="img/logo.svg" alt="Rocket Icon">
+            </button>
+            <div id="recommendations-container" class="recommendations-container"></div>
+        </div>
+    </div>
+    <div id="about" class="section">
+        <div class="content">
+            <h1>About Us</h1>
+            <p>Welcome to TravelBloom! We are passionate about travel and dedicated to helping you discover amazing destinations. Our team of travel experts curates personalized recommendations to ensure you have the best travel experiences.</p>
+            <div class="team">
+                <div class="team-member">
+                    <img src="img/helmet.svg" alt="Space Helmet">
+                    <h3>John Doe</h3>
+                    <p>CEO</p>
+                </div>
+                <div class="team-member">
+                    <img src="img/helmet.svg" alt="Space Helmet">
+                    <h3>Jane Smith</h3>
+                    <p>COO</p>
+                </div>
+                <div class="team-member">
+                    <img src="img/helmet.svg" alt="Space Helmet">
+                    <h3>Emily Johnson</h3>
+                    <p>CTO</p>
+                </div>
+                <div class="team-member">
+                    <img src="img/helmet.svg" alt="Space Helmet">
+                    <h3>Michael Brown</h3>
+                    <p>CMO</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="contact" class="section">
+        <div class="content">
+            <h1>Contact Us</h1>
+            <p>If you have any questions, feedback, or need assistance, please feel free to contact us. We are here to help you with all your travel needs.</p>
+            <div class="contact-form">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Your Name">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Your Email">
+                <label for="message">Message</label>
+                <textarea id="message" rows="5" placeholder="Your Message"></textarea>
+                <button type="submit" onclick="alert('Message sent!')">Submit</button>
+            </div>
+        </div>
+    </div>
+    <script src="travel_recommendation.js"></script>
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.getElementById(sectionId + '-link').classList.add('active');
+
+            // Hide the search bar on About Us and Contact Us pages
+            const searchBarContainer = document.getElementById('search-bar-container');
+            const placeholder = document.getElementById('placeholder');
+            if (sectionId === 'about' || sectionId === 'contact') {
+                searchBarContainer.style.display = 'none';
+                placeholder.style.display = 'block';
+            } else {
+                searchBarContainer.style.display = 'flex';
+                placeholder.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
